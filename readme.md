@@ -2,4 +2,5 @@
 Our social network for Korean drama lovers!!
 
 ###Schema
-(schema)[schema.md]
+
+Please see the [docs](schema.md)
