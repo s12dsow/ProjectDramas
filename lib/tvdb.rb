@@ -32,4 +32,11 @@ module TVDB
     BASE_URL + API_KEY + '/series/' + series_id.to_s + '/all/en.xml'
   end
 
+  def self.search(query)
+    terms = query.split(' ').join("%20")
+    xml = HTTParty.get("http://www.thetvdb.com/api/GetSeries.php?seriesname=" + terms)
+  
+    result = xml["Data"].nil? ? []  : [xml["Data"]["Series"]]
+    result.flatten
+  end
 end
