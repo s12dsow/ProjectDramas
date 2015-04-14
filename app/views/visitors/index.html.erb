@@ -1,4 +1,17 @@
 <div class="welcome">
 	<h1>Welcome dramaLovers!</h1>
 
+
+  <h1>Find a show</h1>
+
+  <div id="form-main">
+    <%= form_tag drama_search_path, :method => 'get' do %>
+      <%= text_field_tag :search, params[:search], :id => "textfield-main" %>
+      <%= submit_tag "Search", :name => nil, :class => "btn btn-large" %>
+    <% end %>
+  </div>
+
+
+</div>
+
 <div>
