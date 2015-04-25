@@ -5,7 +5,6 @@ class DramasController < ApplicationController
 	end
 
 	def show
-    Drama.get_drama(params[:id]) unless Drama.exists?(params[:id])
     @drama = Drama.find(params[:id])
   end
 

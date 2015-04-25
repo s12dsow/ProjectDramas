@@ -5,38 +5,46 @@ module TVDB
   BASE_URL = 'http://www.thetvdb.com/api/'
 
   def self.build_drama(series_id)
-    xml = xml_response(series_id)
+    xml = get(series_url(series_id))
 
-    drama = parse_drama(xml, series_id)
+    drama = parse_drama(xml["Data"]["Series"])
   end
 
-  def self.parse_drama(xml, series_id)
-    name   = xml['Data']['Series']['SeriesName']
-    summary = xml['Data']['Series']['Overview']
-    image  = "http://www.thetvdb.com/banners/" + xml['Data']['Series']['poster'].to_s
-    tvdbid = xml['Data']['Series']['id']
+  def self.parse_drama(drama_xml)
+    name   = drama_xml['SeriesName']
+    summary = drama_xml['Overview']
+    image  = "http://www.thetvdb.com/banners/" + (drama_xml['poster'] || drama_xml['banner']).to_s
+    tvdbid = drama_xml['id']
 
-    drama = Drama.new(name: name, summary: summary, image: image, tvdbid: tvdbid )
-    # might not be the best way to go here -- what if use another api?
-    # tvdb_id
-    drama.id = tvdbid
-    drama.save
+    drama = Drama.find_or_create_by(tvdbid: tvdbid)
+    drama.update_attributes(name: name, summary: summary, image: image)
     return drama
   end
 
-  def self.xml_response(series_id)
-    HTTParty.get(build_url(series_id))
+  def self.get(url)
+    get_url = HTTParty.get(url)
   end
 
-  def self.build_url(series_id)
-    BASE_URL + API_KEY + '/series/' + series_id.to_s + '/all/en.xml'
+  def self.build_authenticated_url(path)
+    BASE_URL + API_KEY + path
+  end
+
+  def self.series_url(series_id)
+    build_authenticated_url('/series/' + series_id.to_s + '/all/en.xml')
+  end
+
+  def self.build_url(path)
+    BASE_URL + path
   end
 
   def self.search(query)
     terms = query.split(' ').join("%20")
-    xml = HTTParty.get("http://www.thetvdb.com/api/GetSeries.php?seriesname=" + terms)
+
+    xml = get(build_url("/GetSeries.php?seriesname=" + terms))
   
     result = xml["Data"].nil? ? []  : [xml["Data"]["Series"]]
-    result.flatten
+    result.flatten.map do |drama|
+      parse_drama(drama)
+    end
   end
 end
