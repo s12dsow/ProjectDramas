@@ -1,7 +1,7 @@
 test:
   override:
-    - bin/rake spec
-    - bin/rake rubocop
+    - bundle exec rspec
+    - bundle exec rubocop
 deployment:
   production:
     branch: master
