@@ -9,10 +9,6 @@ class DramasController < ApplicationController
 
   def search
     @dramas = TVDB.search(params[:search])
-
-    if @dramas.empty?
-      redirect_to root_path
-      flash[:error] = "No show found!"
-    end
+    redirect_to root_path && flash[:error] = "No show found!" if @dramas.empty?
   end
 end
