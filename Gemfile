@@ -65,4 +65,3 @@ group :development, :test do
   # Specifically pulls in cops for rspec
   gem "rubocop-rspec", "1.3.0"
 end
-
