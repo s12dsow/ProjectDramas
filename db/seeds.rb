@@ -5,3 +5,7 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+YAML.load_file(Rails.root.join("db", "seeds.yml"))
+User.create(seeds["user"])
+Drama.create(seeds["drama"])

@@ -1,0 +1,11 @@
+<% if user_signed_in? %>
+  <li><%= link_to 'Home', root_path, :id => 'home' %></li>
+  <li><%= link_to 'Profile', edit_user_registration_path, :id => 'user' %></li>
+  <li><%= link_to 'Logout', destroy_user_session_path, :method=>'delete', :id => 'signout' %></li>
+</ul>
+<% else %>
+  <li><%= link_to 'Home', root_path, :id => 'home' %></li>
+  <li><%= link_to 'Login', new_user_session_path, :id => 'signin' %></li>
+  <li><%= link_to 'Join', new_user_registration_path, :id => 'signup' %></li>
+</ul>
+<% end %>

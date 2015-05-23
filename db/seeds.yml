@@ -1,0 +1,17 @@
+user: 
+  -
+    username: "s12dsow"
+    password: "password"
+  -
+    username: "mmwho"
+    password: "password"
+
+drama:
+  -
+    name: "Coffee Prince"
+    summary: Boy falls in love with girl which he thinks is a boy"
+    content_url: "https://youtu.be/94UkVK4SyJQ"
+  -
+    name: "Ditto"
+    summary: "Time traveling love that is not meant to be"
+    content_url: "https://youtu.be/DrCn-HELAxE"

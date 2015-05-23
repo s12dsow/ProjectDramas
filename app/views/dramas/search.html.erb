@@ -1,0 +1,15 @@
+<div>
+  <h2>Search for any Drama!</h2>
+
+  <ul>
+    <li>Name</li> 
+    <li>Summary</li>
+  </ul>
+
+  <ul>
+    <% @dramas.each do |drama| %>
+      <li><%= link_to drama.name, drama_path(drama.id) %></li>
+      <li><%= drama.summary %></li>
+    <% end %>
+  </ul>
+</div>
