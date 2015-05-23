@@ -4,7 +4,7 @@ test:
     - bin/rake rubocop
 deployment:
   production:
-  branch: master
+    branch: master
     commands:
       - git push git@heroku.com:dramatalk.git $CIRCLE_SHA1:master
       - heroku run rake db:migrate --app dramatalk
