@@ -1,4 +1,4 @@
-class Users
+class User
   class UnlocksController < Devise::UnlocksController
     # GET /resource/unlock/new
     # def new
