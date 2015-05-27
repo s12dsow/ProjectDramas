@@ -9,7 +9,7 @@ feature "Signing in" do
     fill_in "Password", with: user.password
     click_button "Log in"
     visit root_path
-    expect(page).to have_content "Welcome dramaLovers!"
+    expect(page).to have_content "Welcome #{user.name}!"
   end
 
   scenario "Signing in with incorrect credentials" do
