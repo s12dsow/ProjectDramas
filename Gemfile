@@ -19,6 +19,7 @@ gem "devise", "3.4.1"
 gem "omniauth-facebook"
 gem "tvdb_ruby"
 gem "httparty"
+gem "launchy"
 
 # Use jquery as the JavaScript library
 gem "jquery-rails", "4.0.3"
