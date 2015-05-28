@@ -1,5 +1,5 @@
 development:
-  secret_key_base: 
+  SECRET_KEY: ""
 
 test:
-  secret_key_base: 
+  SECRET_KEY: ""
