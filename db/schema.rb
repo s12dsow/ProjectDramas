@@ -11,10 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150527033836) do
+ActiveRecord::Schema.define(version: 20150606200315) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "collections", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "drama_id"
+    t.boolean  "watched?"
+    t.integer  "rating"
+    t.text     "review"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "collections", ["drama_id"], name: "index_collections_on_drama_id", using: :btree
+  add_index "collections", ["user_id"], name: "index_collections_on_user_id", using: :btree
 
   create_table "dramas", force: :cascade do |t|
     t.string   "name"
@@ -25,19 +38,6 @@ ActiveRecord::Schema.define(version: 20150527033836) do
     t.string   "image"
     t.integer  "tvdbid"
   end
-
-  create_table "user_dramas", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "drama_id"
-    t.boolean  "watched?"
-    t.integer  "rating"
-    t.text     "review"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "user_dramas", ["drama_id"], name: "index_user_dramas_on_drama_id", using: :btree
-  add_index "user_dramas", ["user_id"], name: "index_user_dramas_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -60,6 +60,6 @@ ActiveRecord::Schema.define(version: 20150527033836) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
-  add_foreign_key "user_dramas", "dramas"
-  add_foreign_key "user_dramas", "users"
+  add_foreign_key "collections", "dramas"
+  add_foreign_key "collections", "users"
 end

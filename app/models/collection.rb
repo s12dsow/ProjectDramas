@@ -1,4 +1,4 @@
-class UserDrama < ActiveRecord::Base
+class Collection < ActiveRecord::Base
   belongs_to :user
   belongs_to :drama
 end
