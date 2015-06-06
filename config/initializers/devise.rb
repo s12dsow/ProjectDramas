@@ -4,7 +4,7 @@ Devise.setup do |config|
   # The secret key used by Devise. Devise uses this key to generate
   # random tokens. Changing this key will render invalid all existing
   # confirmation, reset password and unlock tokens in the database.
-  # config.secret_key = "8c435859bae465e339fc43a12b3fde061f0cd5c0e240b435cac6ec76ea3b0e640ebc75aa851d6b7c724f7ba361a0302b11afff9b6e73d1cb4725bad949eb3605"
+  config.secret_key = ENV["DEVISE_SECRET_KEY"]
 
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
@@ -257,5 +257,5 @@ Devise.setup do |config|
   # so you need to do it manually. For the users scope, it would be:
   # config.omniauth_path_prefix = "/my_engine/users/auth"
 
-  config.omniauth :facebook, Figaro.env.facebook_api_key, Figaro.env.facebook_secret, scope: "email,user_birthday,read_stream", display: "popup"
+  config.omniauth :facebook, ENV["FACEBOOK_API_PUBLIC"], ENV["FACEBOOK_API_PRIVATE"], scope: "email,user_birthday,read_stream", display: "popup"
 end
