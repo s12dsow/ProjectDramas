@@ -3,12 +3,10 @@
 
   <h1>Find a show</h1>
 
-  <div id="form-main">
-    <%= form_tag drama_search_path, :method => 'get' do %>
-      <%= text_field_tag :search, params[:search], :id => "textfield-main" %>
-      <%= submit_tag "Search", :name => nil, :class => "btn btn-large" %>
+  <div class="search-drama">
+    <%= form_tag(drama_search_path, method: "get") do %>
+      <%= text_field_tag :search, params[:search] %>
+      <%= submit_tag "Search" %>
     <% end %>
   </div>
-</div>
 <div>
- 
